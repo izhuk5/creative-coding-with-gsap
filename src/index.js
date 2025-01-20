@@ -1,8 +1,5 @@
 import { Clock } from './clock';
-
-let a = 15;
-console.log(a);
-
-
+import { reveal } from './helpers/reveal';
 
 const clock = new Clock('.hero_clock');
+reveal();
