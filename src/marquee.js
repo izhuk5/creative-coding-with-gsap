@@ -16,7 +16,7 @@ export class Marquee {
   }
 
   updateDimensions() {
-    this.marqueeIneerWidth = this.marqueeInner.offsetWidth;
+    this.marqueeInnerWidth = this.marqueeInner.offsetWidth; // Corrected here
     this.marqueeWidth = this.marquee.offsetWidth;
     this.gap = parseFloat(getComputedStyle(this.marquee).gap) || 0;
   }
@@ -29,8 +29,8 @@ export class Marquee {
     existingClones.forEach((clone) => clone.remove());
 
     // Calculate how many copies we need to fill the container plus one extra
-    // to ensure smooth infiniti scrolling
-    const numCopies = Math.ceil(this.marqueeWidth / this.marqueeIneerWidth) + 1;
+    // to ensure smooth infinite scrolling
+    const numCopies = Math.ceil(this.marqueeWidth / this.marqueeInnerWidth) + 1; // Corrected here
 
     // Clean up old wrapper if it exists
     if (this.wrapper) {
@@ -42,7 +42,7 @@ export class Marquee {
     this.wrapper.style.display = "flex";
     this.wrapper.style.gap = `${this.gap}px`;
 
-    // Check if the marqueeInner need to be moved
+    // Check if the marqueeInner needs to be moved
     if (this.marqueeInner.parentElement !== this.wrapper) {
       this.marqueeInner.remove();
       this.wrapper.appendChild(this.marqueeInner);
@@ -59,19 +59,18 @@ export class Marquee {
 
   animate() {
     // Calculate the total width of the item (including gaps)
-    const itemWidth = this.marqueeIneedWidth + this.gap;
+    const itemWidth = this.marqueeInnerWidth + this.gap; // Corrected here
 
     // Create the animation
     this.animation = gsap.to(this.wrapper, {
-      x: -innerWidth,
-      duration: 30,
+      x: -itemWidth, // Corrected here
+      duration: 2,
       ease: 'none',
       repeat: -1,
       onRepeat: () => {
-        // Imediately reset position when animation repeats
+        // Immediately reset position when animation repeats
         gsap.set(this.wrapper, { x: 0 });
         console.log('repeat');
-
       }
     });
   }
@@ -80,7 +79,7 @@ export class Marquee {
     // Update dimensions
     this.updateDimensions();
 
-    // Kll existing animation
+    // Kill existing animation
     if (this.animation) {
       this.animation.kill();
     }
