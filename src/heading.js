@@ -27,7 +27,7 @@ export class Heading {
 
   createDuplicateChars() {
     this.chars.forEach((char, index) => {
-      const charCloneUnshifted = char.cloneNode(true);
+      const charCloneUnsifted = char.cloneNode(true);
       const charCloneShifted = char.cloneNode(true);
 
       // make position absolute
@@ -48,7 +48,7 @@ export class Heading {
       }
 
       char.innerHTML = ''; // clear the original char
-      char.appendChild(charCloneUnshifted);
+      char.appendChild(charCloneUnsifted);
       char.appendChild(charCloneShifted);
     });
   }
@@ -65,7 +65,7 @@ export class Heading {
 
     // Animate each child of this.chars
     this.chars.forEach((char, index) => {
-      const charCloneUnshifted = char.children[0];
+      const charCloneUnsifted = char.children[0];
       const charCloneShifted = char.children[1];
       const delay = getRandomDelay();
 
@@ -81,7 +81,7 @@ export class Heading {
           },
           delay
         ).to(
-          charCloneUnshifted,
+          charCloneUnsifted,
           {
             yPercent: -100,
             duration: 1,
@@ -104,7 +104,7 @@ export class Heading {
           },
           delay
         ).to(
-          charCloneUnshifted,
+          charCloneUnsifted,
           {
             xPercent: 100,
             duration: 1,
@@ -127,7 +127,7 @@ export class Heading {
           },
           delay
         ).to(
-          charCloneUnshifted,
+          charCloneUnsifted,
           {
             yPercent: 100,
             duration: 1,
@@ -150,7 +150,7 @@ export class Heading {
           },
           delay
         ).to(
-          charCloneUnshifted,
+          charCloneUnsifted,
           {
             xPercent: 100,
             duration: 1,

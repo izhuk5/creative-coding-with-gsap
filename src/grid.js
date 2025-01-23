@@ -1,5 +1,7 @@
 import gsap from 'gsap';
 
+import colorStore from './stores/ColorStore';
+
 // Block class remains unchanged
 class Block {
   constructor(x, y, width) {
@@ -119,12 +121,12 @@ export class Grid {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.fillStyle = '#292929';
+    this.ctx.fillStyle = colorStore.colors.textPrimary;
     this.blocks.forEach((block) => block.draw(this.ctx));
   }
 
   handleResize() {
-    console.log('Resing grid');
+    console.log('Resizing grid');
 
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
