@@ -1,5 +1,5 @@
-import gsap from 'gsap';
-import SplitType from 'split-type';
+import gsap from "gsap";
+import SplitType from "split-type";
 
 export class Heading {
   constructor(element) {
@@ -15,24 +15,29 @@ export class Heading {
 
   splitText(elementToSplit) {
     const splitTypeObject = new SplitType(elementToSplit, {
-      types: 'chars',
+      types: "chars",
     });
     const { chars } = splitTypeObject;
     chars.forEach((char) => {
-      char.style.overflow = 'clip';
-      char.style.position = 'relative';
+      char.style.overflow = "clip";
+      char.style.position = "relative";
     });
     return splitTypeObject.chars;
   }
 
   createDuplicateChars() {
+    // create duplicate chars.
+    // first is below
+    // second is to left
+    // third is above
+    // fourth is to right
     this.chars.forEach((char, index) => {
-      const charCloneUnsifted = char.cloneNode(true);
+      const charCloneUnshifted = char.cloneNode(true);
       const charCloneShifted = char.cloneNode(true);
 
-      // make position absolute
-      charCloneShifted.style.position = 'absolute';
-      charCloneShifted.style.inset = '0';
+      // make pos absolute
+      charCloneShifted.style.position = "absolute";
+      charCloneShifted.style.inset = "0";
 
       if (index % 4 === 0) {
         gsap.set(charCloneShifted, { yPercent: 100 });
@@ -46,9 +51,8 @@ export class Heading {
       if (index % 4 === 3) {
         gsap.set(charCloneShifted, { xPercent: 100 });
       }
-
-      char.innerHTML = ''; // clear the original char
-      char.appendChild(charCloneUnsifted);
+      char.innerHTML = ""; // clear the original char
+      char.appendChild(charCloneUnshifted);
       char.appendChild(charCloneShifted);
     });
   }
@@ -57,7 +61,7 @@ export class Heading {
     // Create a repeating timeline
     const tl = gsap.timeline({
       repeat: -1, // -1 means infinite repeat
-      repeatDelay: 1, // delay between repeats
+      repeatDelay: 1, // Add a 1 second pause between each repeat
     });
 
     // Helper function to get random delay between 2 and 3 seconds
@@ -65,7 +69,7 @@ export class Heading {
 
     // Animate each child of this.chars
     this.chars.forEach((char, index) => {
-      const charCloneUnsifted = char.children[0];
+      const charCloneUnshifted = char.children[0];
       const charCloneShifted = char.children[1];
       const delay = getRandomDelay();
 
@@ -75,17 +79,17 @@ export class Heading {
           {
             yPercent: 0,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true, // Makes the animation reverse
             repeat: 1, // Go forward and back once
           },
           delay
         ).to(
-          charCloneUnsifted,
+          charCloneUnshifted,
           {
             yPercent: -100,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
@@ -98,17 +102,17 @@ export class Heading {
           {
             xPercent: 0,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
           delay
         ).to(
-          charCloneUnsifted,
+          charCloneUnshifted,
           {
             xPercent: 100,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
@@ -121,17 +125,17 @@ export class Heading {
           {
             yPercent: 0,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
           delay
         ).to(
-          charCloneUnsifted,
+          charCloneUnshifted,
           {
             yPercent: 100,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
@@ -144,17 +148,17 @@ export class Heading {
           {
             xPercent: 0,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
           delay
         ).to(
-          charCloneUnsifted,
+          charCloneUnshifted,
           {
-            xPercent: 100,
+            xPercent: -100,
             duration: 1,
-            ease: 'power4.out',
+            ease: "power4.out",
             yoyo: true,
             repeat: 1,
           },
